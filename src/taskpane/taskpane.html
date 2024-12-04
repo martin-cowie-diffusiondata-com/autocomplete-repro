@@ -1,0 +1,115 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license. -->
+<!-- See LICENSE in the project root for license information -->
+
+<!doctype html>
+<html lang="en" data-framework="typescript">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet"
+        href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
+
+    <!-- Template styles -->
+    <link href="/taskpane/taskpane.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+        
+        .form-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        label {
+            flex: 0 0 100px;
+            text-align: right;
+            padding-right: 1rem;
+        }
+        
+        input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button[type="submit"] {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #0052a3;
+        }
+        button[type="submit"]:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+    
+</head>
+
+<body class="ms-font-m ms-Fabric">
+    
+    <h2>AutoComplete Experiment</h2>
+    <form autoComplete="on" class="form-container" onsubmit="doSubmit(event)">
+        <div class="form-row">
+            <label htmlFor="firstName">First Name:</label>
+            <input name="firstName" id="firstName" type="text" autoComplete="given-name" />
+        </div>
+    
+        <div class="form-row">
+            <label htmlFor="lastName">Last Name:</label>
+            <input name="lastName" id="lastName" type="text" autoComplete="family-name" />
+        </div>
+    
+        <div class="form-row">
+            <label htmlFor="email">Email:</label>
+            <input name="email" id="email" type="email" autoComplete="off" />
+        </div>
+    
+        <div class="form-row">
+            <label htmlFor="password">Password:</label>
+            <input name="password" id="password" type="password" autoComplete="current-password" />
+        </div>
+    
+        <button id="sub-button" type="submit">Submit</button>
+    </form>
+    
+    <script>
+        if (Office) {
+            Office.onReady(() => {});
+        }
+
+        function doSubmit(ev) {
+            ev.preventDefault();
+    
+            const button = document.getElementById("sub-button");
+            button.innerText = "Submitted";
+            button.disabled = true;
+        }
+    </script>
+
+</body>
+
+</html>
